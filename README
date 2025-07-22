@@ -1,0 +1,39 @@
+ What Is It?
+This system gives credit scores to crypto wallets that use the Aave V2 lending protocol. The score ranges from 0 (very risky) to 1000 (very trustworthy).
+
+How Does It Work?
+Labeling Wallets
+
+If a wallet was liquidated (lost its collateral), it's marked as risky.
+
+If it borrowed but was never liquidated, it’s considered reliable.
+
+If it never borrowed, it gets a neutral score of 750.
+
+Training the Model A machine learning model (XGBoost) learns patterns from these labeled wallets to figure out what "risky behavior" looks like.
+
+Predicting Scores The model gives a risk probability (how likely a wallet is to get liquidated). Then it calculates a score like this: Score = (1 - risk probability) × 1000 So less risk means a higher score.
+
+What Data Does the Model Use?
+It looks at:
+
+Repayment ratio: How well the wallet pays back loans.
+
+Current debt: How much debt it has now.
+
+Borrowing history: How much it's borrowed before.
+
+Single large loans: Shows risk appetite.
+
+Wallet age: Older wallets may be more reliable.
+
+Activity level: More transactions suggest more experience.
+
+How Can It Be Improved?
+Train on more data for better accuracy.
+
+Fine-tune the model settings.
+
+Add smarter features (like asset volatility).
+
+Use simpler models for easier understanding
